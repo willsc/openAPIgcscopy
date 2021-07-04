@@ -1,0 +1,76 @@
+openapi: 3.1.0
+info:
+  title: bucket-gcpcopyv1
+  version: '1.0'
+servers:
+  - url: 'http://localhost:3000'
+paths:
+  '/users/{userId}':
+    parameters:
+      - schema:
+          type: integer
+        name: userId
+        in: path
+        required: true
+        description: Id of an existing user.
+  /user: {}
+  '/copy/{path}':
+    parameters:
+      - schema:
+          type: string
+        name: path
+        in: path
+        required: true
+    get:
+      summary: path
+      tags: []
+      responses:
+        '200':
+          description: OK
+        '201':
+          description: Created
+        '400':
+          description: Bad Request
+      operationId: get-copy-path
+  '/delete/{path}':
+    parameters:
+      - schema:
+          type: string
+          maxLength: 256
+          minLength: 0
+          pattern: '^([a-zA-Z]?\:?[^\/\\:*?"<>|]*|[\/\\]{1,2}[^\/\\:*?"<>|]+[\/\\][^\/\\:*?"<>|]+)([\/\\][^\/\\:*?"<>|]+)+'
+        name: path
+        in: path
+        required: true
+    get:
+      summary: Delete
+      tags:
+        - Delete
+      responses:
+        '200':
+          description: OK
+        '201':
+          description: Created
+        '400':
+          description: Bad Request
+      operationId: get-delete-path
+  '/list{path}':
+    parameters:
+      - schema:
+          type: string
+        name: path
+        in: path
+        required: true
+    get:
+      summary: list
+      tags: []
+      responses:
+        '200':
+          description: OK
+        '201':
+          description: Created
+        '400':
+          description: Bad Request
+      operationId: get-list-path
+components:
+  schemas: {}
